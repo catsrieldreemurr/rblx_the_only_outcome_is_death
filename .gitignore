@@ -1,0 +1,8 @@
+# Project place file
+/outcome_is_death.rbxlx
+
+# Roblox Studio lock files
+/*.rbxlx.lock
+/*.rbxl.lock
+
+sourcemap.json
