@@ -10,7 +10,7 @@ local function setupProximityPrompt(part:Instance)
     if part:IsA('ProximityPrompt') then
 
         computerModule.initializeProximityPrompt(part)
-        part.Triggered:Connect(function(plr:Player)
+        part.Triggered:Connect(function()
             computerModule.ToggleComputerFunction()
         end)
     end
@@ -19,7 +19,7 @@ end
 CollectionService:GetInstanceAddedSignal("computerDisableTag"):Connect(disablePC)
 
 for _, part in CollectionService:GetTagged("computerDisableTag") do
-    part.MouseButton1Click:Connect(function(plr)
+    part.MouseButton1Click:Connect(function()
          disablePC()
     end)
 end
