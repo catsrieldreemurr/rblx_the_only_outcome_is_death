@@ -5,6 +5,9 @@ local ui_components = ReplicatedStorage:WaitForChild("ui_Components")
 local plrGUI = game.Players.LocalPlayer.PlayerGui
 
 local contentWindow = plrGUI:WaitForChild("Computer").Window.StartMenu.ContentWindow
+local computerWindow = plrGUI.Computer.Window.Error_area
+
+local rng = Random.new(os.time())
 
 ComputerShortcutModule.ShortcutData = {
     {
@@ -43,6 +46,24 @@ function ComputerShortcutModule.SetupShortcut(index:number)
     clone:WaitForChild("image_icon").Image = ComputerShortcutModule.ShortcutData[index].icon
 
     print("Successfully Initialized " .. ComputerShortcutModule.ShortcutData[index].Name)
+end
+
+function ComputerShortcutModule.CreateFakePopup()
+    local clone = ui_components.PopupError:Clone()
+    
+    local outerbounds = 600
+
+    local randomPositionX = rng:NextInteger(0, outerbounds)
+    local randomPositionY = rng:NextInteger(0, outerbounds)
+
+    clone.Position = UDim2.fromOffset(randomPositionX, randomPositionY)
+    clone.Parent = computerWindow
+end
+
+function ComputerShortcutModule.PurgeAllErrors()
+    for _, part in computerWindow:GetChildren() do
+        part:Destroy()
+    end
 end
 
 
