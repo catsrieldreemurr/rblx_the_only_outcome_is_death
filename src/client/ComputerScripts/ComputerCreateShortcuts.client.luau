@@ -2,6 +2,7 @@ local CollectionService = game:GetService("CollectionService")
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local SoundService = game:GetService("SoundService")
 local ComputerShortcuts = require(ReplicatedStorage.Shared.ComputerShortcuts)
+local ComputerToggle = require(ReplicatedStorage.Shared.ComputerToggle)
 
 local computer = game.Players.LocalPlayer.PlayerGui:WaitForChild("Computer")
 
@@ -23,6 +24,10 @@ function setUpShortcutClick(part:Instance)
 
             if amountOfPopups >= 35 then 
                 bsod_event:FireServer()
+                amountOfPopups = 0
+                ComputerShortcuts.PurgeAllErrors()
+
+                ComputerToggle.enableBSOD()
             end
             print(amountOfPopups)
         end)
